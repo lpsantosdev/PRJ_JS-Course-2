@@ -49,8 +49,8 @@ function clearField() {
 }
 
 function restartGame() {
-    let secretNumber = randomNumberGenerate();
-    let countAttempt = 1;
+    secretNumber = randomNumberGenerate();
+    countAttempt = 1;
     initialMessage();
     clearField();
     document.getElementById("reiniciar").setAttribute("disabled",true);
