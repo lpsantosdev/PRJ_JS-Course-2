@@ -1,19 +1,17 @@
+let sortNumbers = [];
+let numberListLimit = 100;
 let secretNumber = randomNumberGenerate();
 let countAttempt = 1;
 
 function showInfoScreen(tag, text) {
     let field = document.querySelector(tag);
     field.innerHTML = text;
+    responsiveVoice.speak(text, "UK English Female", {rate: 1.2});
 }
-
-/*let titleH1 = document.querySelector("h1");
-titleH1.innerHTML = "Secret Number Game";
-let paragrapher1 = document.querySelector("p");
-paragrapher1.innerHTML = "Welcome to the Secret Number Game, choose a number between 1 and 10."*/
 
 function initialMessage() {
     showInfoScreen("h1", "Secret Number Game");
-    showInfoScreen("p", "Welcome to this game, choose a number between 1 and 10.");
+    showInfoScreen("p", `Welcome to this game, choose a number between 1 and ${numberListLimit}.`);
 }
 
 initialMessage();
@@ -40,7 +38,17 @@ function checkNumber() {
 }
 
 function randomNumberGenerate() {
-    return parseInt(Math.random() *10 + 1);
+    let numberGenerated = parseInt(Math.random() *numberListLimit + 1);
+    let sortNumbersLength = sortNumbers.length;
+    if  (sortNumbersLength == numberListLimit){
+        sortNumbers = [];
+    }
+    if (sortNumbers.includes(numberGenerated)){
+        return randomNumberGenerate();
+    }else {
+        sortNumbers.push(numberGenerated);
+        return numberGenerated
+    }
 }
 
 function clearField() {
